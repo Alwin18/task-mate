@@ -70,3 +70,9 @@ Develop by Go with Domain-Driven Design (DDD) architecture that uses Swagger API
   - /db: Database connection and settings.
 * /interfaces: Stores the service and controller implementations for the model domain.
 * go.mod: Go module file that manages dependencies.
+
+# Generate
+using this comand for first generate swagger
+```
+swagger -q generate server -A task-mate -f api/swagger/swagger.yaml -s gen/api -m gen/models
+```

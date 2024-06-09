@@ -1,34 +1,64 @@
-openapi: 3.0.0
+swagger: "2.0"
 info:
-  title: Employee API
+  title: Task Mate API
   version: 1.0.0
 paths:
+  /health:
+    get:
+      tags: [health]
+      summary: 'Health Check'
+      description: 'Check if the App is Running'
+      operationId: health
+      security: []
+      responses:
+        200:
+          description: 'Health Check'
+          schema:
+            $ref: '#/definitions/Success'
+        500:
+          schema:
+            type: string
+          description: Server Error
   /employees:
     get:
       summary: Get all employees
       responses:
         '200':
           description: A list of employees
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Employee'
-components:
-  schemas:
-    Employee:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Employee'
+
+definitions:
+    # Model
+  principal:
+    type: object
+    properties:
+      name:
+        type: string
+      roles:
+        type: array
+        items:
           type: string
-        role:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
+  Employee:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      role:
+        type: string
+      created_at:
+        type: string
+        format: date-time
+      updated_at:
+        type: string
+        format: date-time
+  # Response
+  Success:
+    type: object
+    properties:
+      message:
+        type: string
